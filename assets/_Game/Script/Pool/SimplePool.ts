@@ -1,5 +1,11 @@
-import PoolMember from "./PoolMember";
+// Learn TypeScript:
+//  - https://docs.cocos.com/creator/manual/en/scripting/typescript.html
+// Learn Attribute:
+//  - https://docs.cocos.com/creator/manual/en/scripting/reference/attributes.html
+// Learn life-cycle callbacks:
+//  - https://docs.cocos.com/creator/manual/en/scripting/life-cycle-callbacks.html
 
+import PoolMember from "./PoolMember";
 const { ccclass, property } = cc._decorator;
 
 export enum PoolType {
@@ -15,6 +21,7 @@ export enum PoolType {
 
 @ccclass
 export default class SimplePool {
+
     //trong scene sẽ cần tạo một node và add poolcontrol vào
     //list pool control được dùng để khởi tạo số lượng item tương ứng
     //prefab nào muốn dùng pool sẽ phải kế thừa poolmember
@@ -46,7 +53,7 @@ export default class SimplePool {
     }
 
     static spawn(nodeType: PoolType, pos: cc.Vec3, angle: number = 0): PoolMember {
-        console.log(nodeType);
+        // console.log(nodeType);
         if(!this.isHasPool(nodeType)) console.error(" NEED PRELOAD POOL : " + nodeType + "!!!");
         return this.getPool(nodeType).spawn(pos, angle);
     }
@@ -68,6 +75,7 @@ export default class SimplePool {
 
     }
 }
+
 
 class Pool {
 

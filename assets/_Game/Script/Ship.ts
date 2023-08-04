@@ -91,15 +91,51 @@ export default class Ship extends cc.Component {
         }
     }
 
-    shoot(){
-        this.bulletPoints.forEach(point => {
-            (SimplePool.spawn(PoolType.Bullet_1,  point.getWorldPosition(),point.angle) as Bullet).onInit(10);
-        })
+    private shoot(){
+        for (let i = 0; i < this.bulletPoints.length; i++) {
+          (SimplePool.spawn(PoolType.Bullet_1,  this.bulletPoints[i].getWorldPosition(),this.bulletPoints[i].angle) as Bullet).onInit(10);
+        }
+      }
+
+    public onAwake() {
+        this.moveTo(cc.Vec3.UP.mul(-500), 1 , 
+        ()=> {
+            //bật tut
+            //bật fx
+            // this.ripple.active = true;
+            // UIManager.Ins.onOpen(0);
+        } ,
+        false);
     }
 
-    onStart(){
+    public onStart(): void{
         if(!this.isShooting){
             this.isShooting = true;
         }
     }
+
+    public onFinish(): void {
+        this.isShooting = false;
+        this.moveTo(this.node.position.add(cc.Vec3.UP.mul(-200)), 1 ,
+        ()=>  this.moveTo(this.node.position.add(cc.Vec3.UP.mul(10000)), 1 ,
+        // ()=> UIManager.Ins.onOpen(1) 
+        () => console.log('hi')
+        ,false)
+        ,false);
+    
+      }
+    
+      public moveTo(target: cc.Vec3, duration: number, doneAction: Function, isWorldSpace: boolean): void {
+        // Lấy vị trí target position của node
+        const targetPosition = isWorldSpace ? this.node.getLocalPosition(target) : target;
+    
+        // Tạo một tween để di chuyển node từ vị trí hiện tại đến vị trí mới (position)
+        cc.tween(this.node)
+          .to(duration,
+            { position: targetPosition },
+            { easing: "linear", }
+          )
+          .call(doneAction)
+          .start();
+      }
 }

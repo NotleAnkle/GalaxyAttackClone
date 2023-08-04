@@ -5,6 +5,7 @@
 // Learn life-cycle callbacks:
 //  - https://docs.cocos.com/creator/manual/en/scripting/life-cycle-callbacks.html
 
+import CacheComponent from "./CacheComponent";
 import PoolMember from "./Pool/PoolMember";
 import SimplePool from "./Pool/SimplePool";
 
@@ -33,6 +34,7 @@ export default class Bullet extends PoolMember {
     }
 
     onCollisionEnter(other: cc.Collider, self: cc.Collider){
+        CacheComponent.getCharacter(other).onHit(this.damage);
         SimplePool.despawn(this);
     }
 }

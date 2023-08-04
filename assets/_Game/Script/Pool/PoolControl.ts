@@ -8,7 +8,7 @@
 import PoolMember from "./PoolMember";
 import SimplePool from "./SimplePool";
 
-const {ccclass, property} = cc._decorator;
+const {ccclass, property, inspector} = cc._decorator;
 
 @ccclass
 export class PoolAmount {
@@ -21,15 +21,24 @@ export class PoolAmount {
     @property(cc.Integer)
     public amount: number = 0;
 }
+
 @ccclass
 export default class PoolControl extends cc.Component {
 
+    // @property({
+    //     type: Array(PoolAmount),
+    //     displayName: "Custom Objects",
+    //     serializable: true,
+    // })
     @property(Array(PoolAmount))
     pools: PoolAmount[] = [];
 
-    onLoad(){
-        for(let i = 0; i > this.pools.length; i++){
+    onLoad () {
+        for (let i = 0; i < this.pools.length; i++){
+            console.log(this.pools[i]);
+            
             SimplePool.preload(this.pools[i].prefab, this.pools[i].root, this.pools[i].amount);
         }
     }
+
 }
