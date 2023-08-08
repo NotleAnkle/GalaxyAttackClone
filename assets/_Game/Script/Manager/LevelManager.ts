@@ -97,9 +97,9 @@ export default class levelManager extends cc.Component {
            }
         }
   
-        // if(!this.isBooster){
-        //    this.isBooster = true;
-        //    SimplePool.spawn(PoolType.Booster, c.node.getWorldPosition());
-        // }
+        if(!this.isBooster){
+           this.isBooster = true;
+           SimplePool.spawn(PoolType.Booster, c.node.getWorldPosition());
+        }
      }
 }
