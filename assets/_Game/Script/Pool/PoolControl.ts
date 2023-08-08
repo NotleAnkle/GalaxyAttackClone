@@ -35,7 +35,7 @@ export default class PoolControl extends cc.Component {
 
     onLoad () {
         for (let i = 0; i < this.pools.length; i++){
-            console.log(this.pools[i]);
+            // console.log(this.pools[i]);
             
             SimplePool.preload(this.pools[i].prefab, this.pools[i].root, this.pools[i].amount);
         }

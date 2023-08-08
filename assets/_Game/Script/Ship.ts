@@ -6,6 +6,8 @@
 //  - https://docs.cocos.com/creator/manual/en/scripting/life-cycle-callbacks.html
 
 import Bullet from "./Bullet";
+import SoundManager, { AudioType } from "./Manager/SoundManager";
+import UIManager from "./Manager/UIManager";
 import SimplePool, { PoolType } from "./Pool/SimplePool";
 import Utilities from "./Utilities";
 
@@ -92,34 +94,44 @@ export default class Ship extends cc.Component {
     }
 
     private shoot(){
+        SoundManager.Ins.PlayClip(AudioType.FX_Bullet);
         for (let i = 0; i < this.bulletPoints.length; i++) {
           (SimplePool.spawn(PoolType.Bullet_1,  this.bulletPoints[i].getWorldPosition(),this.bulletPoints[i].angle) as Bullet).onInit(10);
         }
       }
+
+    public onPowerUp(): void {
+        this.bulletPoints = this.bulletPoints_2;
+        this.shield.active = true;
+        SoundManager.Ins.PlayClip(AudioType.FX_Booster);
+    }
 
     public onAwake() {
         this.moveTo(cc.Vec3.UP.mul(-500), 1 , 
         ()=> {
             //bật tut
             //bật fx
-            // this.ripple.active = true;
-            // UIManager.Ins.onOpen(0);
+            this.ripple.active = true;
+            UIManager.Ins.onOpen(0);
         } ,
         false);
     }
 
     public onStart(): void{
-        if(!this.isShooting){
+        if (!this.isShooting) {
             this.isShooting = true;
-        }
+            //tắt tut
+            //tắt fx
+            this.ripple.active = false;
+            UIManager.Ins.onClose(0);
+          }
     }
 
     public onFinish(): void {
         this.isShooting = false;
         this.moveTo(this.node.position.add(cc.Vec3.UP.mul(-200)), 1 ,
         ()=>  this.moveTo(this.node.position.add(cc.Vec3.UP.mul(10000)), 1 ,
-        // ()=> UIManager.Ins.onOpen(1) 
-        () => console.log('hi')
+        ()=> UIManager.Ins.onOpen(1) 
         ,false)
         ,false);
     

@@ -7,7 +7,7 @@
 
 import CacheComponent from "./CacheComponent";
 import PoolMember from "./Pool/PoolMember";
-import SimplePool from "./Pool/SimplePool";
+import SimplePool, { PoolType } from "./Pool/SimplePool";
 
 const {ccclass, property} = cc._decorator;
 
@@ -35,6 +35,7 @@ export default class Bullet extends PoolMember {
 
     onCollisionEnter(other: cc.Collider, self: cc.Collider){
         CacheComponent.getCharacter(other).onHit(this.damage);
+        SimplePool.spawn(PoolType.VFX_Spark, this.node.getWorldPosition());
         SimplePool.despawn(this);
     }
 }

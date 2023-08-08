@@ -4,14 +4,22 @@
   ],
   "group-list": [
     "default",
-    "player"
+    "player",
+    "booster"
   ],
   "collision-matrix": [
     [
+      true,
+      true
+    ],
+    [
+      true,
+      false,
       true
     ],
     [
       false,
+      true,
       false
     ]
   ],
