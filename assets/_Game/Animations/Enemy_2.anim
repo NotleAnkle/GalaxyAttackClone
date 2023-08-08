@@ -1,0 +1,56 @@
+{
+  "__type__": "cc.AnimationClip",
+  "_name": "Enemy_2",
+  "_objFlags": 0,
+  "_native": "",
+  "_duration": 1.0166666666666666,
+  "sample": 60,
+  "speed": 1,
+  "wrapMode": 2,
+  "curveData": {
+    "paths": {
+      "Wing L Head": {
+        "props": {
+          "angle": [
+            {
+              "frame": 0,
+              "value": 0
+            },
+            {
+              "frame": 0.5,
+              "value": -22.774
+            },
+            {
+              "frame": 1,
+              "value": 0
+            }
+          ]
+        }
+      },
+      "Wing L Head/Wing 2": {
+        "props": {
+          "position": []
+        }
+      },
+      "Wing R Head ": {
+        "props": {
+          "angle": [
+            {
+              "frame": 0.016666666666666666,
+              "value": 0
+            },
+            {
+              "frame": 0.5166666666666667,
+              "value": 22.774
+            },
+            {
+              "frame": 1.0166666666666666,
+              "value": 0
+            }
+          ]
+        }
+      }
+    }
+  },
+  "events": []
+}

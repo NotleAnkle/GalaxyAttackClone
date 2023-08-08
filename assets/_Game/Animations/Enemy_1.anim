@@ -1,0 +1,121 @@
+{
+  "__type__": "cc.AnimationClip",
+  "_name": "Enemy_1",
+  "_objFlags": 0,
+  "_native": "",
+  "_duration": 1.0166666666666666,
+  "sample": 60,
+  "speed": 1,
+  "wrapMode": 2,
+  "curveData": {
+    "paths": {
+      "Feeler1": {
+        "props": {
+          "angle": [
+            {
+              "frame": 0,
+              "value": 0
+            },
+            {
+              "frame": 0.5166666666666667,
+              "value": -49.824
+            },
+            {
+              "frame": 1,
+              "value": 0
+            },
+            {
+              "frame": 1.0166666666666666,
+              "value": 0
+            }
+          ]
+        }
+      },
+      "Feeler1 copy": {
+        "props": {
+          "angle": [
+            {
+              "frame": 0,
+              "value": 0
+            },
+            {
+              "frame": 0.5166666666666667,
+              "value": 40.906
+            },
+            {
+              "frame": 1.0166666666666666,
+              "value": 0
+            }
+          ]
+        }
+      },
+      "Jaw": {
+        "props": {
+          "position": [
+            {
+              "frame": 0,
+              "value": [
+                0,
+                -39,
+                0
+              ]
+            },
+            {
+              "frame": 0.5,
+              "value": [
+                0,
+                -45.598,
+                0
+              ]
+            },
+            {
+              "frame": 1,
+              "value": [
+                0,
+                -39,
+                0
+              ]
+            }
+          ]
+        }
+      },
+      "Feeler2": {
+        "props": {
+          "angle": [
+            {
+              "frame": 0,
+              "value": -3.0290000000000035
+            },
+            {
+              "frame": 0.5,
+              "value": -33.32900000000001
+            },
+            {
+              "frame": 1,
+              "value": -3.0290000000000035
+            }
+          ]
+        }
+      },
+      "Feeler2 copy": {
+        "props": {
+          "angle": [
+            {
+              "frame": 0,
+              "value": -2.7920000000000034
+            },
+            {
+              "frame": 0.5166666666666667,
+              "value": 30.528999999999996
+            },
+            {
+              "frame": 1.0166666666666666,
+              "value": -2.7920000000000034
+            }
+          ]
+        }
+      }
+    }
+  },
+  "events": []
+}
