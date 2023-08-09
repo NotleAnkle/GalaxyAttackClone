@@ -25,11 +25,11 @@ export class PoolAmount {
 @ccclass
 export default class PoolControl extends cc.Component {
 
-    // @property({
-    //     type: Array(PoolAmount),
-    //     displayName: "Custom Objects",
-    //     serializable: true,
-    // })
+    @property({
+        type: Array(PoolAmount),
+        displayName: "Custom Objects",
+        serializable: true,
+    })
     @property(Array(PoolAmount))
     pools: PoolAmount[] = [];
 

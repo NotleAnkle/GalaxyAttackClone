@@ -17,6 +17,7 @@ export enum PoolType {
     VFX_Explore = 12,
     VFX_Spark  = 13,
     Booster  = 14,
+    Boss = 15
 }
 
 @ccclass

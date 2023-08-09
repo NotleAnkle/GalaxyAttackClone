@@ -17,13 +17,15 @@ export default class Bullet extends PoolMember {
     @property
     private speed: number = 2000;
     private damage: number = 4;
+    private direction: number = 1;
 
-    public onInit(damage: number){
+    public onInit(damage: number, direction: number){
         this.damage = damage;
+        this.direction = direction;
     }
 
     update (dt) {
-        const velocity = this.node.up.mul(dt).mul(this.speed);
+        const velocity = this.node.up.mul(dt).mul(this.speed).mul(this.direction);
         const newPos = this.node.position.add(velocity);
 
         this.node.setPosition(newPos);

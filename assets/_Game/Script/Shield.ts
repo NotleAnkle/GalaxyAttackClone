@@ -5,15 +5,20 @@
 // Learn life-cycle callbacks:
 //  - https://docs.cocos.com/creator/manual/en/scripting/life-cycle-callbacks.html
 
+import Character from "./Character";
+
 const {ccclass, property} = cc._decorator;
 
 @ccclass
-export default class CollisionManager extends cc.Component {
-    @property(cc.Boolean)
-    public drawHitBox = true;
-    onLoad() {
-        var manager = cc.director.getCollisionManager();
-        manager.enabled = true;
-        manager.enabledDebugDraw = this.drawHitBox;
+export default class Shield extends Character {
+
+    protected onLoad(): void {
+        this.onInit(100);
     }
+
+    protected onDeath(): void {
+        this.node.destroy();
+    }
+
+    
 }

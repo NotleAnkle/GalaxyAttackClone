@@ -35,7 +35,10 @@ export default class levelManager extends cc.Component {
     @property(cc.Node)
     public stage_2: cc.Node[] = [];
 
-    private list: Character[] = [];
+    @property(cc.Node)
+    public stage_3: cc.Node = null;
+
+    private list: Enemy[] = [];
     private isBooster: boolean;
     private stage: number = 0;
 
@@ -46,6 +49,15 @@ export default class levelManager extends cc.Component {
         this.ship.onAwake();
     }
 
+    public onStart(){
+      for(const e of this.list) e.onStart();
+    }
+
+    public onRestart(){
+      // cc.director.loadScene(cc.director.getScene().name);
+      window.location.reload();
+    }
+   
     public onLoadStage_1(): void {
         this.stage_1.forEach(stage => {
             let e = SimplePool.spawnT<Enemy>(PoolType.Enemy_1, stage.getWorldPosition().add(cc.Vec3.UP.mul(1000)), 0)
@@ -62,6 +74,7 @@ export default class levelManager extends cc.Component {
            e.moveTo(this.stage_2[i].getWorldPosition(), 0.5, true);
            this.list.push(e);
            e.onInit(40);
+           e.onStart();
         }
   
         for (let i = 6; i < this.stage_2.length; i++) {
@@ -69,14 +82,23 @@ export default class levelManager extends cc.Component {
            e.moveTo(this.stage_2[i].getWorldPosition(), 0.5, true);
            this.list.push(e);
            e.onInit(40);
+           e.onStart();
         }
+     }
+
+     public onLoadStage_3() {
+         let e = SimplePool.spawnT<Enemy>(PoolType.Boss, this.stage_3.getWorldPosition().add(cc.Vec3.UP.mul(1000)), 0);
+         e.moveTo(this.stage_3.getWorldPosition(), 1, true);
+         this.list.push(e);
+         e.onInit(4000);
+         e.onStart();
      }
 
      onFinish() {
         this.ship.onFinish();
      }
 
-    public onEnemyDeath(c: Character): void{
+    public onEnemyDeath(c: Enemy): void{
         let index = this.list.indexOf(c);
         if (index != -1) {
            this.list.splice(index, 1);
@@ -91,6 +113,9 @@ export default class levelManager extends cc.Component {
               case 1:
                  this.onLoadStage_2();
                  break;
+               case 2:
+               this.onLoadStage_3();
+               break;
               default:
                  this.onFinish();
                  break;

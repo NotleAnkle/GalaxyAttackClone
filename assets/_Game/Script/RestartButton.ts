@@ -5,15 +5,14 @@
 // Learn life-cycle callbacks:
 //  - https://docs.cocos.com/creator/manual/en/scripting/life-cycle-callbacks.html
 
+import levelManager from "./Manager/LevelManager";
+
 const {ccclass, property} = cc._decorator;
 
 @ccclass
-export default class CollisionManager extends cc.Component {
-    @property(cc.Boolean)
-    public drawHitBox = true;
-    onLoad() {
-        var manager = cc.director.getCollisionManager();
-        manager.enabled = true;
-        manager.enabledDebugDraw = this.drawHitBox;
+export default class RestartButton extends cc.Component {
+
+    public onClick(){
+        levelManager.Ins.onRestart();
     }
 }

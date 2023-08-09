@@ -6,6 +6,8 @@
 //  - https://docs.cocos.com/creator/manual/en/scripting/life-cycle-callbacks.html
 
 import Bullet from "./Bullet";
+import Character from "./Character";
+import levelManager from "./Manager/LevelManager";
 import SoundManager, { AudioType } from "./Manager/SoundManager";
 import UIManager from "./Manager/UIManager";
 import SimplePool, { PoolType } from "./Pool/SimplePool";
@@ -14,7 +16,7 @@ import Utilities from "./Utilities";
 const {ccclass, property} = cc._decorator;
 
 @ccclass
-export default class Ship extends cc.Component {
+export default class Ship extends Character {
 
     @property({
         type: [cc.Node],
@@ -36,6 +38,8 @@ export default class Ship extends cc.Component {
     @property(cc.Node)
     private shield: cc.Node = null;
     
+    @property(cc.Node)
+    private flame: cc.Node = null;
 
     private touchOffset: cc.Vec2;
 
@@ -57,6 +61,8 @@ export default class Ship extends cc.Component {
         this.clampVertical = new cc.Vec2(-0.5, 0.5).mul(this.screen.y);
 
         this.bulletPoints = this.bulletPoints_1;
+
+        this.onInit(40);
     }
 
     //Move
@@ -96,7 +102,7 @@ export default class Ship extends cc.Component {
     private shoot(){
         SoundManager.Ins.PlayClip(AudioType.FX_Bullet);
         for (let i = 0; i < this.bulletPoints.length; i++) {
-          (SimplePool.spawn(PoolType.Bullet_1,  this.bulletPoints[i].getWorldPosition(),this.bulletPoints[i].angle) as Bullet).onInit(10);
+          (SimplePool.spawn(PoolType.Bullet_1,  this.bulletPoints[i].getWorldPosition(),this.bulletPoints[i].angle) as Bullet).onInit(10, 1);
         }
       }
 
@@ -106,13 +112,14 @@ export default class Ship extends cc.Component {
         SoundManager.Ins.PlayClip(AudioType.FX_Booster);
     }
 
-    public onAwake() {
+    public onAwake() {  
         this.moveTo(cc.Vec3.UP.mul(-500), 1 , 
         ()=> {
             //bật tut
             //bật fx
             this.ripple.active = true;
             UIManager.Ins.onOpen(0);
+            this.flame.active = false;
         } ,
         false);
     }
@@ -125,14 +132,18 @@ export default class Ship extends cc.Component {
             this.ripple.active = false;
             UIManager.Ins.onClose(0);
           }
+        levelManager.Ins.onStart();
     }
 
     public onFinish(): void {
         this.isShooting = false;
         this.moveTo(this.node.position.add(cc.Vec3.UP.mul(-200)), 1 ,
-        ()=>  this.moveTo(this.node.position.add(cc.Vec3.UP.mul(10000)), 1 ,
-        ()=> UIManager.Ins.onOpen(1) 
+        ()=> {
+            this.flame.active = true;
+            this.moveTo(this.node.position.add(cc.Vec3.UP.mul(10000)), 2 ,
+            ()=> UIManager.Ins.onOpen(1) 
         ,false)
+        } 
         ,false);
     
       }
@@ -150,4 +161,11 @@ export default class Ship extends cc.Component {
           .call(doneAction)
           .start();
       }
+
+      protected onDeath() {
+        this.node.destroy();
+        SimplePool.spawn(PoolType.VFX_Explore, this.node.getWorldPosition(), 0);
+        SoundManager.Ins.PlayClip(AudioType.FX_EnemyDie);
+        UIManager.Ins.onOpen(2);
+    }
 }
