@@ -1,0 +1,179 @@
+{
+  "__type__": "cc.AnimationClip",
+  "_name": "Boss_Idle",
+  "_objFlags": 0,
+  "_native": "",
+  "_duration": 2.0166666666666666,
+  "sample": 60,
+  "speed": 1,
+  "wrapMode": 2,
+  "curveData": {
+    "paths": {
+      "Right/R-top head": {
+        "props": {
+          "angle": [
+            {
+              "frame": 0,
+              "value": 0
+            },
+            {
+              "frame": 1.0166666666666666,
+              "value": -9.186
+            },
+            {
+              "frame": 2.0166666666666666,
+              "value": 0
+            }
+          ]
+        }
+      },
+      "Right/R-mid head": {
+        "props": {
+          "angle": [
+            {
+              "frame": 0.016666666666666666,
+              "value": 0
+            },
+            {
+              "frame": 0.5166666666666667,
+              "value": 14.05
+            },
+            {
+              "frame": 1.5,
+              "value": -5.387555555555558
+            },
+            {
+              "frame": 2.0166666666666666,
+              "value": 0
+            }
+          ]
+        }
+      },
+      "Right/R-bot head": {
+        "props": {
+          "angle": [
+            {
+              "frame": 0,
+              "value": 0
+            },
+            {
+              "frame": 0.9833333333333333,
+              "value": -34.37213333333333
+            },
+            {
+              "frame": 2.0166666666666666,
+              "value": 0
+            }
+          ]
+        }
+      },
+      "Right/R-jaw head": {
+        "props": {
+          "angle": [
+            {
+              "frame": 0,
+              "value": 0
+            },
+            {
+              "frame": 0.5166666666666667,
+              "value": 13.431
+            },
+            {
+              "frame": 1.5,
+              "value": -3.707766666666668
+            },
+            {
+              "frame": 2.0166666666666666,
+              "value": 0
+            }
+          ]
+        }
+      },
+      "Left/L-top head": {
+        "props": {
+          "angle": [
+            {
+              "frame": 0,
+              "value": 0
+            },
+            {
+              "frame": 1.0166666666666666,
+              "value": 9
+            },
+            {
+              "frame": 2,
+              "value": 0
+            }
+          ]
+        }
+      },
+      "Left/L-mid head": {
+        "props": {
+          "angle": [
+            {
+              "frame": 0,
+              "value": 0
+            },
+            {
+              "frame": 0.5166666666666667,
+              "value": 11.151
+            },
+            {
+              "frame": 1.4666666666666666,
+              "value": -14.821943820224721
+            },
+            {
+              "frame": 1.4833333333333334,
+              "value": -14.821943820224721
+            },
+            {
+              "frame": 2,
+              "value": 0
+            }
+          ]
+        }
+      },
+      "Left/L-bot head": {
+        "props": {
+          "angle": [
+            {
+              "frame": 0,
+              "value": 0
+            },
+            {
+              "frame": 0.7333333333333333,
+              "value": 35.083
+            },
+            {
+              "frame": 2,
+              "value": 0
+            }
+          ]
+        }
+      },
+      "Left/L-jaw head": {
+        "props": {
+          "angle": [
+            {
+              "frame": 0,
+              "value": -12.9977419
+            },
+            {
+              "frame": 0.5166666666666667,
+              "value": -12.538413185892635
+            },
+            {
+              "frame": 1.5,
+              "value": 5.618696302247191
+            },
+            {
+              "frame": 2,
+              "value": -12.9977419
+            }
+          ]
+        }
+      }
+    }
+  },
+  "events": []
+}
