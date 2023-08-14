@@ -13,6 +13,6 @@ const {ccclass, property} = cc._decorator;
 export default class RestartButton extends cc.Component {
 
     public onClick(){
-        levelManager.Ins.onRestart();
+        levelManager.Ins.OnReset();
     }
 }

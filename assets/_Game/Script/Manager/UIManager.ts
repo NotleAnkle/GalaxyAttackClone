@@ -50,4 +50,8 @@ export default class UIManager extends cc.Component {
         }
     }
 
+    public closeAll(){
+        for(let i = 0; i < this.canvas.length; i++) this.onClose(i);
+    }
+
 }

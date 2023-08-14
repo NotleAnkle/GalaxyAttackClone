@@ -30,6 +30,10 @@ export default class Enemy extends Character {
         super.onHit(damage);
     }
 
+    OnInit(){
+        this.isShooting = false;
+    }
+
     onStart(){
         this.isShooting = true;
     }

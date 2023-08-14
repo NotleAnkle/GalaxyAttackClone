@@ -14,6 +14,10 @@ export default class Character extends PoolMember {
         this.hp = hp;
     }
 
+    public getHp(){
+        return this.hp;
+    }
+
     public onHit(damage: number){     
         if(!this.isDead){
             this.hp -= damage;

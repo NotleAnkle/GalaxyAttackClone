@@ -50,7 +50,17 @@ export default class Ship extends Character {
 
     private isShooting: boolean =  false;
 
-    // LIFE-CYCLE CALLBACKS:
+
+    OnInit(){
+        this.node.active = true;
+        this.bulletPoints = this.bulletPoints_1;
+        this.isShooting = false;
+        this.flame.active = true;
+        this.shield.active = false;
+        this.ripple.active = false;
+        this.node.x = 0;
+        this.node.y = -1800;
+    }
 
     onLoad () {
         this.node.on(cc.Node.EventType.TOUCH_START, this.onTouchBegan, this);
@@ -61,8 +71,6 @@ export default class Ship extends Character {
         this.clampVertical = new cc.Vec2(-0.5, 0.5).mul(this.screen.y);
 
         this.bulletPoints = this.bulletPoints_1;
-
-        this.onInit(40);
     }
 
     //Move
@@ -113,6 +121,7 @@ export default class Ship extends Character {
     }
 
     public onAwake() {  
+        this.onInit(40);
         this.moveTo(cc.Vec3.UP.mul(-500), 1 , 
         ()=> {
             //bật tut
@@ -121,7 +130,7 @@ export default class Ship extends Character {
             UIManager.Ins.onOpen(0);
             this.flame.active = false;
         } ,
-        false);
+        false);        
     }
 
     public onStart(): void{
@@ -162,8 +171,8 @@ export default class Ship extends Character {
           .start();
       }
 
-      protected onDeath() {
-        this.node.destroy();
+    protected onDeath() {
+        this.node.active = false;
         SimplePool.spawn(PoolType.VFX_Explore, this.node.getWorldPosition(), 0);
         SoundManager.Ins.PlayClip(AudioType.FX_EnemyDie);
         UIManager.Ins.onOpen(2);

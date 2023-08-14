@@ -73,7 +73,11 @@ export default class SimplePool {
     }
 
     static collectAll() {
+        const poolTypeValue = Array.from(this.link.keys());
 
+        poolTypeValue.forEach(typeValue =>{
+            this.collect(typeValue as number);
+        })
     }
 }
 
@@ -83,6 +87,7 @@ class Pool {
     private parentNode: cc.Node;
     private prefab: PoolMember;
     private list: PoolMember[] = [];
+    private activeList: PoolMember[] = [];
 
     public get poolType(): PoolType{
         return this.prefab.poolType;
@@ -111,7 +116,7 @@ class Pool {
         if (this.list.length > 0) {
             clone = this.list.shift();
         } else {
-            clone = cc.instantiate(this.prefab.node).getComponent(PoolMember);
+            clone = cc.instantiate(this.prefab.node).getComponent(PoolMember);        
             this.parentNode.addChild(clone.node);
         }
 
@@ -119,11 +124,13 @@ class Pool {
         clone.node.angle = angle;
         clone.node.active = true;
 
+        this.activeList.push(clone);
         return clone;
     }
 
     public despawn(clone: PoolMember) {
         if(clone.node.active){
+            clone.OnInit();
             clone.node.active = false;
             this.list.push(clone);
         }
@@ -131,6 +138,9 @@ class Pool {
     }
 
     collect() {
+        while(this.activeList.length > 0) {
+            this.despawn(this.activeList.shift());
+        }    
     }
 
 }

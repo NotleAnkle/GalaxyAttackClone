@@ -17,7 +17,8 @@ export default class Shield extends Character {
     }
 
     protected onDeath(): void {
-        this.node.destroy();
+        this.node.active = false;
+        this.onInit(100);
     }
 
     

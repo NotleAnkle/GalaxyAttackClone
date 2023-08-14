@@ -9,6 +9,7 @@ import Character from "../Character";
 import Enemy from "../Enemy";
 import SimplePool, { PoolType } from "../Pool/SimplePool";
 import Ship from "../Ship";
+import UIManager from "./UIManager";
 
 const {ccclass, property} = cc._decorator;
 
@@ -42,6 +43,32 @@ export default class levelManager extends cc.Component {
     private isBooster: boolean;
     private stage: number = 0;
 
+    //
+
+    public OnInit(): void{
+      this.ship.OnInit();
+      this.list.splice(0, this.list.length);
+      this.stage = 0;
+      this.start();
+    }
+
+
+    public OnLoadLevel(level : number): void{
+      
+    }
+
+    
+    public OnReset(): void{
+      //đưu tất cả oject về pool và đặt lại giá trị thuộc tính
+      SimplePool.collectAll();
+      //tat UI
+      UIManager.Ins.closeAll();
+      //khởi động lại level
+      this.OnInit();
+    }
+
+    //
+
     protected start(): void {
         this.onLoadStage_1();
         this.isBooster = false;
@@ -52,15 +79,10 @@ export default class levelManager extends cc.Component {
     public onStart(){
       for(const e of this.list) e.onStart();
     }
-
-    public onRestart(){
-      // cc.director.loadScene(cc.director.getScene().name);
-      window.location.reload();
-    }
    
     public onLoadStage_1(): void {
         this.stage_1.forEach(stage => {
-            let e = SimplePool.spawnT<Enemy>(PoolType.Enemy_1, stage.getWorldPosition().add(cc.Vec3.UP.mul(1000)), 0)
+            let e = SimplePool.spawnT<Enemy>(PoolType.Enemy_1, stage.getWorldPosition().add(cc.Vec3.UP.mul(1000)), 0);
             e.moveTo(stage.getWorldPosition(),1, true);
             this.list.push(e);
             e.onInit(40);

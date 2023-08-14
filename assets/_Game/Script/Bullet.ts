@@ -30,7 +30,7 @@ export default class Bullet extends PoolMember {
 
         this.node.setPosition(newPos);
 
-        if(this.node.position.y >= 950) {
+        if(Math.abs(this.node.position.y*this.direction) >= 950) {
             SimplePool.despawn(this);
         }
     }
