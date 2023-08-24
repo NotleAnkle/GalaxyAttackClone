@@ -6,6 +6,7 @@
 //  - https://docs.cocos.com/creator/manual/en/scripting/life-cycle-callbacks.html
 
 import Bullet from "./Bullet";
+import CacheComponent from "./CacheComponent";
 import Character from "./Character";
 import levelManager from "./Manager/LevelManager";
 import SoundManager, { AudioType } from "./Manager/SoundManager";
@@ -25,7 +26,7 @@ export default class Enemy extends Character {
     private isShooting: boolean = false;
 
     public onHit(damage: number): void {
-        this.onHitEffect(this.node);
+        this.onHitEffect(this.node, cc.color(120, 0, 120));
         
         super.onHit(damage);
     }
@@ -56,19 +57,6 @@ export default class Enemy extends Character {
             .start();
     }
 
-    private onHitEffect(object){
-        object.color = cc.color(120, 0, 120); // Đặt màu trắng
-        this.scheduleOnce(() => {
-            object.color = cc.color(255, 255, 255); // Quay trở lại màu sắc ban đầu
-        }, 0.1);
-        if(object.children){
-            const children = object.children;
-            for(const child of children){
-                this.onHitEffect(child);
-            }
-        }
-    }
-
     private cooldown: number = (1 + Math.random() * (2 - 1 + 1));
     private timer: number = this.cooldown;
     update (dt) {
@@ -81,6 +69,13 @@ export default class Enemy extends Character {
             }
 
             this.timer -= dt;
+        }
+    }
+
+    onCollisionEnter(other: cc.Collider, self: cc.Collider){
+        if (other.node.group === "player") {
+            CacheComponent.getCharacter(other).onHit(10);
+            SoundManager.Ins.PlayClip(AudioType.FX_EnemyDie);
         }
     }
 }

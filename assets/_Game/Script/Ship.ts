@@ -177,4 +177,10 @@ export default class Ship extends Character {
         SoundManager.Ins.PlayClip(AudioType.FX_EnemyDie);
         UIManager.Ins.onOpen(2);
     }
+
+    public onHit(damage: number): void {
+        this.onHitEffect(this.node, cc.color(0, 100,0));
+        
+        super.onHit(damage);
+    }
 }

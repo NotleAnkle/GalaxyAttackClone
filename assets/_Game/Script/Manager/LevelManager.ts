@@ -9,6 +9,7 @@ import Character from "../Character";
 import Enemy from "../Enemy";
 import SimplePool, { PoolType } from "../Pool/SimplePool";
 import Ship from "../Ship";
+import GameManager, { GameState } from "./GameManager";
 import UIManager from "./UIManager";
 
 const {ccclass, property} = cc._decorator;
@@ -78,6 +79,7 @@ export default class levelManager extends cc.Component {
 
     public onStart(){
       for(const e of this.list) e.onStart();
+      GameManager.Ins.changeState(GameState.Playing);
     }
    
     public onLoadStage_1(): void {
@@ -118,6 +120,7 @@ export default class levelManager extends cc.Component {
 
      onFinish() {
         this.ship.onFinish();
+        GameManager.Ins.changeState(GameState.End);
      }
 
     public onEnemyDeath(c: Enemy): void{

@@ -24,6 +24,8 @@ export default class UIManager extends cc.Component {
             this.roots[i] = new cc.Node();
             this.roots[i].setParent(this.node);
         }
+
+        cc.systemEvent.on(cc.SystemEvent.EventType.KEY_DOWN, this.onKeyDown, this);
     }
     //--------------------------------
 
@@ -53,5 +55,21 @@ export default class UIManager extends cc.Component {
     public closeAll(){
         for(let i = 0; i < this.canvas.length; i++) this.onClose(i);
     }
+
+    onKeyDown(event: cc.Event.EventKeyboard) {
+        if (event.keyCode === cc.macro.KEY.escape) {
+            if (cc.game.isPaused()) {
+                this.onClose(3);
+                cc.game.resume();
+            } else {
+                this.onOpen(3);
+                setTimeout(() => {
+                    cc.game.pause();
+                }, 50);
+                
+            }
+        }
+    }
+    
 
 }
